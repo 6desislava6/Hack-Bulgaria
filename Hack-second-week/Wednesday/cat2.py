@@ -6,8 +6,8 @@ def main():
 
 def open_and_print_mult_files():
     if len(sys.argv) > 1:
-        for file in sys.argv:
-            filename = file
+        for index in range(1, len(sys.argv)):
+            filename = sys.argv[index]
             textfile = open(filename, 'r')
             print(textfile.read())
             print('THIS IS THE END OF A FILE!')
