@@ -1,0 +1,7 @@
+{
+  "name": "HackBulgaria-NodeJS-Programs-Puzzle",
+  "version": "0.0.1",
+  "dependencies": {
+    "underscore": "^1.6.0"
+  }
+}
