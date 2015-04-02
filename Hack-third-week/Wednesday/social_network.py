@@ -78,18 +78,36 @@ class PandaSocialNetwork:
         return isConnection
 
     def how_many_gender_in_network(self, level, panda, gender):
-        # A try for recursion :D
-        if level == 0:
-            return 0
-        if level == 1:
-            count = 0
-            for panda in self.friends_of(panda):
-                if panda.get_gender() == gender:
-                    count += 1
-            return count
+        discovered = []
+        to_be_visited = [panda]
+        counted = []
+        genders_levels = {}
 
-        for panda in self.friends_of(panda):
-            return self.how_many_gender_in_network(level - 1, panda, gender) + self.how_many_gender_in_network(level - 2, panda, gender)
+        # Breadth-first-search counting all pandas from 'gender' gender
+        while len(to_be_visited) > 0:
+            current_panda = to_be_visited[0]
+            to_be_visited = to_be_visited[1:]
+
+            if current_panda not in discovered:
+                discovered.append(current_panda)
+                for friend_panda in self.friends_of(current_panda):
+                    if friend_panda not in discovered:
+                        to_be_visited.append(friend_panda)
+                        if friend_panda.get_gender() == gender and friend_panda not in counted:
+                            connection = self.connection_level(
+                                panda, friend_panda)
+                            counted.append(friend_panda)
+                            if connection in genders_levels:
+                                genders_levels[connection] += 1
+                            else:
+                                genders_levels.update({connection: 1})
+        # I have found for all pandas, connected to 'panda',
+        # of gender 'gender' their connection level.
+        # I will sum all, which have connection level <= 'level'
+        count = 0
+        for i in range(1, level + 1):
+            count += genders_levels[i]
+        return count
 
 
 # Thus I find the not visited panda with smalletst value!

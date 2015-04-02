@@ -45,23 +45,33 @@ class Test_Network(unittest.TestCase):
         self.assertFalse(self.network.friends_of(bla))
 
     def test_connection_level(self):
-        # Wannabe Graph :D
+        # Wannabe Graph again :D
         ivo = Panda("Ivo", "ivo@pandamail.com", "male")
         rado = Panda("Rado", "rado@pandamail.com", "male")
         mimi = Panda('mimi', 'mimi@mail.bg', 'female')
         gosho = Panda('gosho', 'gosho@mail.bg', 'male')
         tony = Panda('tony', 'tony@mail.bg', 'female')
+        sasho = Panda('sasho', 'sasho@mail.bg', 'male')
+        pesho = Panda('pesho', 'pesho@mail.bg', 'male')
+        kremena = Panda('kremena', 'kremena@mail.bg', 'female')
         sad = Panda('sad', 'sad@mail.bg', 'male')
+
         self.network.make_friends(ivo, rado)
         self.network.make_friends(ivo, gosho)
         self.network.make_friends(ivo, mimi)
         self.network.make_friends(rado, mimi)
         self.network.make_friends(rado, tony)
         self.network.make_friends(tony, gosho)
+        self.network.make_friends(kremena, pesho)
+        self.network.make_friends(kremena, tony)
+        self.network.make_friends(kremena, mimi)
+        self.network.make_friends(sasho, gosho)
 
         self.assertEqual(self.network.connection_level(ivo, rado), 1)
+        self.assertEqual(self.network.connection_level(kremena, rado), 2)
         self.assertEqual(self.network.connection_level(ivo, sad), -1)
         self.assertEqual(self.network.connection_level(mimi, tony), 2)
+        self.assertEqual(self.network.connection_level(pesho, gosho), 3)
 
     def test_are_connected(self):
         # Wannabe Graph again :D
@@ -83,25 +93,37 @@ class Test_Network(unittest.TestCase):
         self.assertTrue(self.network.are_connected(ivo, rado))
 
     def test_how_many_genders(self):
-         # Wannabe Graph again :D
+        # Wannabe Graph again :D
         ivo = Panda("Ivo", "ivo@pandamail.com", "male")
         rado = Panda("Rado", "rado@pandamail.com", "male")
         mimi = Panda('mimi', 'mimi@mail.bg', 'female')
         gosho = Panda('gosho', 'gosho@mail.bg', 'male')
         tony = Panda('tony', 'tony@mail.bg', 'female')
+        sasho = Panda('sasho', 'sasho@mail.bg', 'male')
+        pesho = Panda('pesho', 'pesho@mail.bg', 'male')
+        kremena = Panda('kremena', 'kremena@mail.bg', 'female')
+
         self.network.make_friends(ivo, rado)
         self.network.make_friends(ivo, gosho)
         self.network.make_friends(ivo, mimi)
         self.network.make_friends(rado, mimi)
         self.network.make_friends(rado, tony)
         self.network.make_friends(tony, gosho)
+        self.network.make_friends(kremena, pesho)
+        self.network.make_friends(kremena, tony)
+        self.network.make_friends(kremena, mimi)
+        self.network.make_friends(sasho, gosho)
 
-        self.assertTrue(
-            self.network.how_many_gender_in_network(1, rado, 'male') == 1)
-        self.assertTrue(
-            self.network.how_many_gender_in_network(1, rado, 'female') == 2)
-        self.assertTrue(
-            self.network.how_many_gender_in_network(2, rado, 'male') == 2)
+        self.assertEqual(
+            self.network.how_many_gender_in_network(1, rado, 'female'), 2)
+        self.assertEqual(
+            self.network.how_many_gender_in_network(1, rado, 'male'), 1)
+        self.assertEqual(
+            self.network.how_many_gender_in_network(1, rado, 'female'), 2)
+        self.assertEqual(
+            self.network.how_many_gender_in_network(2, rado, 'male'), 2)
+        self.assertEqual(
+            self.network.how_many_gender_in_network(3, kremena, 'male'), 5)
 
 if __name__ == '__main__':
     unittest.main()
