@@ -89,8 +89,7 @@ class PandaSocialNetwork:
             return count
 
         for panda in self.friends_of(panda):
-            return self.how_many_gender_in_network(
-                level - 1, panda, gender)
+            return self.how_many_gender_in_network(level - 1, panda, gender) + self.how_many_gender_in_network(level - 2, panda, gender)
 
 
 # Thus I find the not visited panda with smalletst value!
