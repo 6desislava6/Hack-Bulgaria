@@ -24,6 +24,9 @@ class Panda:
     def __hash__(self):
         return hash(self.name)
 
+    def __repr__(self):
+        return 'Panda({}, {}, {})'.format(self.name, self.email, self.gender)
+
     def get_name(self):
         return self.name
 
@@ -39,9 +42,9 @@ class Panda:
     def check_isFemale(self):
         return self.gender == 'female'
 
+
 def is_valid_email(email):
     if re.search('([^@|\s]+@[^@]+\.[^@|\s]+)', email) == None:
         return False
     else:
         return re.search('([^@|\s]+@[^@]+\.[^@|\s]+)', email).group() == email
-
