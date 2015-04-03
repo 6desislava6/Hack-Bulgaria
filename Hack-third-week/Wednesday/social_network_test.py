@@ -1,8 +1,8 @@
 import unittest
 from panda import Panda
-from social_network import PandaSocialNetwork
-from social_network import PandaAlreadyThere
-from social_network import PandasAlreadyFriends
+from social_network_2 import PandaSocialNetwork
+from social_network_2 import PandaAlreadyThere
+from social_network_2 import PandasAlreadyFriends
 
 
 class Test_Network(unittest.TestCase):
