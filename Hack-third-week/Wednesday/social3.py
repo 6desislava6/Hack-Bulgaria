@@ -111,26 +111,17 @@ class PandaSocialNetwork:
             count += genders_levels[i]
         return count
 
-    def remap_keys(self):
-        string_dict = {}
-        for panda in self.pandas:
-            str_panda = repr(panda)
-            friends_str_panda = []
-
-            for friend in self.pandas[panda]:
-                friends_str_panda.append(repr(friend))
-            string_dict.update({str_panda: friends_str_panda})
-        return string_dict
-
     def save(self, file_name):
         with open(file_name, 'w') as outfile:
             json.dump(self.remap_keys(), outfile)
 
     def load(self, file_name):
-        with open(file_name, 'r') as outfile:
-            json.dump(self.remap_keys(), outfile)
+        with open(file_name, 'r') as infile:
+            self.pandas = json.loads(infile.read(), object_hook=object_decoder)
 
 # Thus I find the not visited panda with smalletst value!
+
+
 def get_key_with_min_val(ways, pandas_to_be_visited):
     bestkey = None
     bestValue = float('inf')
@@ -141,24 +132,46 @@ def get_key_with_min_val(ways, pandas_to_be_visited):
     return bestkey
 
 
+def object_decoder(obj):
+    network = {}
+    for panda in obj:
+        current_panda = eval(panda)
+        friends = [eval(friend_panda) for friend_panda in obj[panda]]
+        network.update({current_panda: friends})
+    return network
+
+# No tests this time :D
+
+
 def main():
     filename = 'output.txt'
+
     network = PandaSocialNetwork()
     ivo = Panda("Ivo", "ivo@pandamail.com", "male")
     rado = Panda("Rado", "rado@pandamail.com", "male")
     mimi = Panda('mimi', 'mimi@mail.bg', 'female')
     gosho = Panda('gosho', 'gosho@mail.bg', 'male')
     tony = Panda('tony', 'tony@mail.bg', 'female')
-    sad = Panda('sad', 'sad@mail.bg', 'male')
+    sasho = Panda('sasho', 'sasho@mail.bg', 'male')
+    pesho = Panda('pesho', 'pesho@mail.bg', 'male')
+    kremena = Panda('kremena', 'kremena@mail.bg', 'female')
+
     network.make_friends(ivo, rado)
     network.make_friends(ivo, gosho)
     network.make_friends(ivo, mimi)
     network.make_friends(rado, mimi)
     network.make_friends(rado, tony)
     network.make_friends(tony, gosho)
-    # print(network.pandas)
-    print(network.remap_keys())
+    network.make_friends(kremena, pesho)
+    network.make_friends(kremena, tony)
+    network.make_friends(kremena, mimi)
+    network.make_friends(sasho, gosho)
+
     network.save(filename)
+    network1 = PandaSocialNetwork()
+    network1.load(filename)
+    print(network1.how_many_gender_in_network(3, kremena, 'male'))
+
 
 if __name__ == '__main__':
     main()

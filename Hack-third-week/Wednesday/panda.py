@@ -25,7 +25,7 @@ class Panda:
         return hash(self.name)
 
     def __repr__(self):
-        return 'Panda({}, {}, {})'.format(self.name, self.email, self.gender)
+        return "Panda('{}', '{}', '{}')".format(self.name, self.email, self.gender)
 
     def get_name(self):
         return self.name
