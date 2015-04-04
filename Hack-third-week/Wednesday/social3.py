@@ -119,6 +119,17 @@ class PandaSocialNetwork:
         with open(file_name, 'r') as infile:
             self.pandas = json.loads(infile.read(), object_hook=object_decoder)
 
+    def remap_keys(self):
+        string_dict = {}
+        for panda in self.pandas:
+            str_panda = repr(panda)
+            friends_str_panda = []
+
+            for friend in self.pandas[panda]:
+                friends_str_panda.append(repr(friend))
+            string_dict.update({str_panda: friends_str_panda})
+        return string_dict
+
 # Thus I find the not visited panda with smalletst value!
 
 
