@@ -5,6 +5,7 @@ class Song:
         self.artist = kwargs['artist']
         self.album = kwargs['album']
         self.length = kwargs['length']
+        self.path = ''
 
     def __str__(self):
         return '{} - {} from {} - {}'.format(self.artist, self.title, self.album, self.length)

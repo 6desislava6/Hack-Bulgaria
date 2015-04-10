@@ -5,16 +5,17 @@ import json
 class Playlist:
 
     def __init__(self, name, repeat=False, shuffle=False):
+
         self.name = name
         self.repeat = repeat
         self.shuffle = shuffle
         self.playlist = []
         self.current_index = -1
+
         # Artists
         self.artists = []
-        self.artists_songs = {}
-        self.unique_artists = set()
-        # for next_song
+
+        # For next_song
         self.songs_to_be_played = [x for x in range(len(self.playlist))]
 
     def add_song(self, song):
@@ -41,17 +42,18 @@ class Playlist:
 
     def get_artists(self):
         resulting_str = ''
+        artists_songs = {}
         for artist in self.artists:
-            if artist not in self.artists_songs:
-                self.artists_songs.update({artist: 0})
+            if artist not in artists_songs:
+                artists_songs.update({artist: 0})
             else:
-                self.artists_songs[artist] += 1
+                artists_songs[artist] += 1
         # Making set of unique artirsts
-        self.unique_artists = set(self.artists)
-        for artist in self.unique_artists:
+        unique_artists = set(self.artists)
+        for artist in unique_artists:
             resulting_str += '{} -> {}'.format(artist,
-                                               self.artists_songs[artist]) + '/n'
-            print('{} -> {}'.format(artist, self.artists_songs[artist]))
+                                              artists_songs[artist]) + '/n'
+            print('{} -> {}'.format(artist, artists_songs[artist]))
         return resulting_str
 
     def next_song(self):
@@ -130,3 +132,9 @@ class Playlist:
                 p.add_song(song)
 
             return p
+
+    def change_shuffle_mode(self, shuffle):
+        self.shuffle = shuffle
+
+    def change_repeat_mode(self, repeat):
+        self.repeat = repeat
