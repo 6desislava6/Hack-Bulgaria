@@ -14,7 +14,7 @@ class Test_Network(unittest.TestCase):
         self.network.add_panda(self.ivo)
 
     def test_init(self):
-        self.assertTrue(isinstance(self.network, PandaSocialNetwork))
+        self.assertTrue(isinstance(self.network, PandaSocialNehtwork))
 
     def test_add_panda(self):
         self.assertTrue(self.ivo in self.network.pandas.keys())

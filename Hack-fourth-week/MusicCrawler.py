@@ -9,8 +9,9 @@ import datetime
 class MusicCrawler:
 
     def __init__(self, path):
-        self.path = path
-        self.files_in_dir = [x for x in os.listdir(path) if x.endswith('.mp3')]
+        self.path = os.path.abspath(path)
+        self.files_in_dir = [x for x in os.listdir(self.path) if x.endswith('.mp3')]
+        self.path = os.path.abspath(path) + '/'
 
     def generate_playlist(self):
         code_songs = Playlist(name="Code", repeat=True, shuffle=False)
@@ -22,7 +23,7 @@ class MusicCrawler:
             length = str(datetime.timedelta(seconds=int(audio.info.length)))
             new_song = Song(
                 title=title, artist=artist, album=album, length=length)
-            new_song.path = music_file
+            new_song.path = self.path + music_file
             code_songs.add_song(new_song)
         return code_songs
 

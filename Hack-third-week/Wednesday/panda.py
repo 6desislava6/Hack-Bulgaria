@@ -13,7 +13,7 @@ class Panda:
             raise ValueError
 
     def __str__(self):
-        return self.name
+        return "{} - {} - {}".format(self.name, self.email, self.gender)
 
     def __eq__(self, another):
         equal_names = (self.get_name() == another.get_name())

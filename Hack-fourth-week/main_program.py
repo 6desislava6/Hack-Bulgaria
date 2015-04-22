@@ -22,6 +22,7 @@ def main():
     while(switchOn):
         input_command = input('Type command here: ')
         if input_command == "Q":
+            music_player.stop_playing_all()
             switchOn = False
             break
         elif input_command == "D":

@@ -11,7 +11,7 @@ class MusicPlayer:
         self.main_playlist = Playlist(name="Code", repeat=True, shuffle=True)
 
     def __play(self, mp3Path):
-        process = Popen(["mpg123", './Music/' + mp3Path], stdout=PIPE, stderr=PIPE)
+        process = Popen(["mpg123", mp3Path], stdout=PIPE, stderr=PIPE)
         return process
 
     def __stop(self):
