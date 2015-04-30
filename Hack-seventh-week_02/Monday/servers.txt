@@ -1,0 +1,16 @@
+nginx
+nginx
+Apache
+Apache
+nginx
+nginx
+Apache
+Apache
+Apache
+Apache
+Apache
+nginx
+nginx
+Apache
+Apache
+{'nginx': 6, 'Apache': 9}
