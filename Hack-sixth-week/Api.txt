@@ -1,0 +1,11 @@
+You often have to rely on others to perform functions that you may not be able or permitted to do by yourself, such as opening a bank safety deposit box. Similarly, virtually all software has to request other software to do some things for it.
+oops key showing mistake error or failure 96395168
+Starbucks hit by major computer failure
+
+Starbucks suffered a major computer system failure late Friday that took down its sales systems at
+Read Now
+
+To accomplish this, the asking program uses a set of standardized requests, called application programming interfaces (API), that have been defined for the program being called upon
+
+Developers can make requests by including calls in the code of their applications. The syntax is described in the documentation of the application being called.
+Building an application with no APIs, says Josh Walker, an analyst at Forrester Research Inc. in Cambridge, Mass., "is basically like building a house with no doors. The API for all computing purposes is how you open the blinds and the doors and exchange information." APIs also exist between applications.
