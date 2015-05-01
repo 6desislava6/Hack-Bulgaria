@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 import operator
 
 
-def make_json_urls(filename):
-    crawler = BigCrawler()
-    url = 'http://start.bg/'
+def make_json_urls(filename, url):
+
+    crawler = BigCrawler(url)
     soup_box = BigCrawler.get_soup_box(url)
     crawler.get_links(soup_box)
     # servers = BigCrawler.get_servers(links)
@@ -35,7 +35,8 @@ def complete_histogram(bg_histogram, servers):
 def main():
     bg_histogram = Histogram()
     db = DataMaker('mydb-servers')
-    # make_json_urls('all_urls.json')
+    # url = 'http://start.bg/'
+    # make_json_urls('all_urls.json', url)
     # urls = load_urls('all_urls.json')
     # BigCrawler.get_servers(urls, db)
 

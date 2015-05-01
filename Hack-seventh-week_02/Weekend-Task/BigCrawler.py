@@ -7,9 +7,10 @@ from DataMaker_urls import DataMaker
 
 class BigCrawler:
 
-    def __init__(self):
+    def __init__(self, site):
         self.inner_links = []
         self.links = []
+        self.SITE = site
 
     @staticmethod
     def get_soup_box(url):
@@ -26,7 +27,7 @@ class BigCrawler:
                 if 'start.bg' in link:
                     self.inner_links.append(link)
                 elif 'link.php?' in link or link.startswith('/'):
-                    self.links.append('http://www.start.bg/' + link)
+                    self.links.append(self.SITE + link)
 
         self.links = list(set(self.links))
         self.inner_links = list(set(self.inner_links))
