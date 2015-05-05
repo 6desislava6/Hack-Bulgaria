@@ -61,8 +61,42 @@ class DataMaker:
         self.db.commit()
 
     def list_users(self):
-        return self.cursor.execute("SELECT id, name, github FROM users")
+        self.cursor.execute("SELECT id, name, github FROM users")
+        return self.cursor.fetchall()
 
     def list_courses(self):
-        return self.cursor.execute("SELECT id, name FROM courses")
+        self.cursor.execute("SELECT id, name FROM courses")
+        return self.cursor.fetchall()
 
+    def show_user(self, id_user):
+        self.cursor.execute('''SELECT * FROM users
+                WHERE id = ?''', (id_user, ))
+        info = self.cursor.fetchone()
+        name = info['name']
+        github = info['github']
+        self.cursor.execute('''SELECT * FROM Students_To_Course
+            where student_id = ?''', (id_user, ))
+        info = self.cursor.fetchall()
+        courses = []
+        courses_names = []
+
+        for line in info:
+            courses.append(line['course_id'])
+
+        for id_course in courses:
+            self.cursor.execute('''SELECT * FROM Courses
+                where id = ?''', (id_course, ))
+            info = self.cursor.fetchone()
+            courses_names.append(info['name'])
+
+        return [name, github, courses_names]
+
+    def show_course_users(self, course_id):
+        self.cursor.execute('''SELECT * from Students_To_Course JOIN users
+         ON Students_To_Course.student_id = users.id
+         WHERE course_id = ?''', (course_id, ))
+        table_course = self.cursor.fetchall()
+        names = []
+        for line in table_course:
+            names.append(line['name'])
+        return names
