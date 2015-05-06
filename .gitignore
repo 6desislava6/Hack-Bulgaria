@@ -23,3 +23,6 @@ Hack-eight-week/mydb
 Hack-eight-week/self.cursor.execute('''SELECT
 Hack-seventh-week_02/Monday/envs2/
 Hack-seventh-week_02/Monday/mydb-servers
+/__pycache__/
+Hack-fourth-week/__pycache__/
+
