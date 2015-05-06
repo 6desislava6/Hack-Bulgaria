@@ -36,8 +36,8 @@ class CommandIO:
     @staticmethod
     def delete_employee(db):
         id_employee = input('id>')
-        deleted = db.delete_employee(id_employee)
-        print('Deleted ' + deleted)
+        db.delete_employee(id_employee)
+        #print('Deleted ' + deleted)
 
     @staticmethod
     def update_employee(db):

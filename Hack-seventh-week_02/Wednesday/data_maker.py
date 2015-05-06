@@ -1,3 +1,4 @@
+
 import sqlite3
 
 
@@ -40,9 +41,10 @@ class DataMaker:
     def delete_employee(self, id_employee):
         empl = self.cursor.execute(
             '''SELECT name FROM company WHERE id = ? ''', (id_employee))
+       # name = empl['name']
         self.cursor.execute(
             '''DELETE FROM company WHERE id = ? ''', (id_employee))
-        return empl['name']
+       # return name
 
     def update_employee(self, id_employee, name, monthly_salary, yearly_bonus, position):
         self.cursor.execute('''UPDATE company SET name = ?,
