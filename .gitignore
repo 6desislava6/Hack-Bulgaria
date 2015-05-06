@@ -16,3 +16,5 @@ Hack-third-week/Wednesday/__pycache__/
 Hack-forth-week/__pycache__/
 Hack-sixth-week/__pycache__/
 Hack-eight-week/__pycache__/
+*.sqlite3
+*.db
