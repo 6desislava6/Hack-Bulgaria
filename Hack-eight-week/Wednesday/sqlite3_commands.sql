@@ -8,20 +8,20 @@ SELECT * FROM employees ORDER BY HireDate LIMIT 5;
 SELECT * FROM employees WHERE ReportsTo is null;
 SELECT a.FirstName, b.FirstName
 FROM employees AS a JOIN employees AS b ON a.ReportsTo = b.EmployeeID;
-SELECT COUNT(*) FROM employees
+SELECT COUNT(EmployeeID) FROM employees
 WHERE (TitleOfCourtesy = 'Ms.' OR TitleOfCourtesy = 'Mrs.') ;
-SELECT COUNT(*) FROM employees
+SELECT COUNT(EmployeeID) FROM employees
  WHERE (TitleOfCourtesy = 'Mr.' OR TitleOfCourtesy = 'Dr.') ;
 SELECT * FROM (SELECT DISTINCT City FROM employees)
 AS a JOIN (SELECT FirstName, City FROM employees) AS b ON a.City = b.City;
 SELECT * FROM (SELECT DISTINCT City FROM employees)
 AS a JOIN (SELECT FirstName, City FROM employees) AS b ON a.City = b.City;
-SELECT count(*) FROM employees GROUP BY City;
+SELECT count(EmployeeID), City FROM employees GROUP BY City;
 SELECT ORDERID, FirstName, LastName FROM orders JOIN
 employees ON orders.EmployeeID = employees.EmployeeID;
 SELECT ORDERID, CompanyName FROM orders JOIN shippers ON orders.ShipVia = shippers.ShipperID;
-SELECT count(*) FROM orders GROUP BY ShipCountry;
-SELECT count(*), EmployeeID FROM orders
+SELECT count(OrderID), ShipCountry FROM orders GROUP BY ShipCountry;
+SELECT count(OrderID), EmployeeID FROM orders
  GROUP BY EmployeeID;
 SELECT FirstName, LastName FROM employees AS a inner JOIN
  orders AS b ON a.EmployeeID = b.EmployeeID
