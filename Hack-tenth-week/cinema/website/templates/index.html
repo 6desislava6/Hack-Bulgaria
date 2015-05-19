@@ -1,39 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <table class="movies">
-    <th>Movies!</th>
-        {% for movie in movies %}
-            <tr>
-                <td>
-                    {{ movie.name }}
-                </td>
-                <td>
-                    {{ movie.rating }}
-                </td>
-                <td>
-                    <img src="/media/{{ movie.cover }}">
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-    <table class="projection">
-    <th>Projections!</th>
-    {% for projection in projections %}
+    <table class="movies-and-projections">
+    <th>Movies & Projections!</th>
+    {% for key, value in projections.items %}
         <tr>
+            <td>{{ key.name }}</td>
             <td>
-                {{ projection.movie.name }}
-            </td>
-            <td>
-                {{ projection.type_projection }}
-            </td>
-            <td>
-                {{ projection.date }}
-            </td>
-               <td>
-                {{ projection.time_projection }}
+                <table>
+                    {% for pr in value %}
+                    <tr>
+                         <td>{{pr.type_projection}}</td>
+                        <td>{{pr.date}}</td>
+                        <td>{{pr.time_projection}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </td>
         </tr>
     {% endfor %}
     </table>
+
 {% endblock %}

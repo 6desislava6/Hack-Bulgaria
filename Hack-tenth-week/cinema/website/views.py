@@ -5,7 +5,9 @@ from .models import Movie, Projection
 
 def index(request):
     movies = Movie.objects.all()
-    projections = Projection.objects.all()
+    projections = {}
+    for movie in movies:
+        projections[movie] = movie.projection_set.all()
     return render(request, 'index.html', locals())
 
 

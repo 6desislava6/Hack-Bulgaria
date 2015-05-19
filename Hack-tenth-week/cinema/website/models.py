@@ -14,6 +14,9 @@ class Movie(models.Model):
     def __str__(self):
         return '{} - {}'.format(self.name, self.rating)
 
+    def __hash__(self):
+        return hash(self.name)
+
 
 # 1 movie - MANY projections 1:N
 class Projection(models.Model):
@@ -28,13 +31,15 @@ class Projection(models.Model):
                          'type_projection'], date=kwargs[
                          'date'], time_projection=kwargs[
                          'time'])
-        print('here')
-        print(projection)
         projection.save()
+
+    @classmethod
+    def show_movie_projections(cls, movie_id):
+        projections = Projection.objects.filter(movie__id=movie_id)
+        return projections
 
     def __str__(self):
         return """{} - {} - {} - {}""".format(self.movie.name, self.type_projection, self.date, self.time_projection)
-
 
 class Reservation(models.Model):
     username = models.CharField(unique=True, max_length=20)
