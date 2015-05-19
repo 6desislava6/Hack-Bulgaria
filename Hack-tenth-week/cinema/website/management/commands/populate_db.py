@@ -32,10 +32,6 @@ class Command(BaseCommand):
         Reservation.add_reservation(username='marmot', row='1', col='1', projection=Projection.objects.get(movie__name='Inception'))
 
     def handle(self, *args, **options):
-        # self._delete_movies()
-        # self._add_movies()
-        # self._add_projections()
-        # self._delete_projections()
-        # self._add_projections()
-        # self._add_reservations()
-        pass
+        self._add_movies()
+        self._add_projections()
+        self._add_reservations()
